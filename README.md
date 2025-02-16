@@ -1,6 +1,6 @@
 # ocr-cli
 
-[![wakatime](https://wakatime.com/badge/user/a0b906ce-b8e7-4463-8bce-383238df6d4b/project/3ab8ca50-a24a-46b4-af93-e8a6a55f670a.svg)](https://wakatime.com/badge/user/a0b906ce-b8e7-4463-8bce-383238df6d4b/project/3ab8ca50-a24a-46b4-af93-e8a6a55f670a)
+[![wakatime](https://wakatime.com/badge/user/a0b906ce-b8e7-4463-8bce-383238df6d4b/project/05104fef-08a9-4cf0-983f-06083d816599.svg)](https://wakatime.com/badge/user/a0b906ce-b8e7-4463-8bce-383238df6d4b/project/05104fef-08a9-4cf0-983f-06083d816599)
 [![Node.js CI](https://github.com/ragaeeb/ocr-cli/actions/workflows/build.yml/badge.svg)](https://github.com/ragaeeb/ocr-cli/actions/workflows/build.yml)
 ![GitHub License](https://img.shields.io/github/license/ragaeeb/ocr-cli)
 ![GitHub Release](https://img.shields.io/github/v/release/ragaeeb/ocr-cli)
