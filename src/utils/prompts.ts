@@ -1,4 +1,5 @@
 import { input as prompt, select } from '@inquirer/prompts';
+import os from 'node:os';
 import path from 'node:path';
 
 export const getAnswers = async () => {
@@ -22,7 +23,7 @@ export const getAnswers = async () => {
     });
 
     const outputFileName = await prompt({
-        default: path.format({ ext: '.json', name: pdf }),
+        default: path.format({ ext: '.json', name: path.parse(pdf).name }),
         message: 'Enter the output file name:',
         transformer: (input) => input.trim(),
         validate: (input) => (input.endsWith('.json') ? true : 'Output file is required.'),
@@ -37,5 +38,7 @@ export const getAnswers = async () => {
         message: 'Select language',
     });
 
-    return { language, outputFileName, pdf, resumeToken, volume: parseInt(volume, 10) };
+    const outputFolder = path.join(os.tmpdir(), path.parse(outputFileName).name);
+
+    return { language, outputFileName, outputFolder, pdf, resumeToken, volume: parseInt(volume, 10) };
 };

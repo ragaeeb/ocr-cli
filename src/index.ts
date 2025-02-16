@@ -10,8 +10,6 @@ import {
 } from '@ragaeeb/ocr-js';
 import welcome from 'cli-welcome';
 import { promises as fs } from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
 
 import packageJson from '../package.json' assert { type: 'json' };
 import { loadConfiguration } from './utils/config.js';
@@ -40,7 +38,9 @@ const main = async () => {
         logger: (message) => logger.info(message),
     });
 
-    const { language, outputFileName, pdf, resumeToken, volume } = await getAnswers();
+    logger.info(config);
+
+    const { language, outputFileName, outputFolder, pdf, resumeToken, volume } = await getAnswers();
 
     const requestId = resumeToken || generateRequestId(pdf);
 
@@ -50,10 +50,7 @@ const main = async () => {
     logger.info(`OCR already done: ${alreadyProcessed}`);
     const ocrEngine: { name?: string; timestamp: Date; version?: string } = { timestamp: new Date() };
 
-    if (1 === Number(1)) {
-        console.log(config, language, outputFileName, pdf, resumeToken, volume);
-        return;
-    }
+    logger.info({ language, outputFileName, pdf, resumeToken, volume });
 
     if (!alreadyProcessed) {
         const { name, processorVersionDisplayName, processorVersionName } = await requestOCR(pdf, {
@@ -65,7 +62,6 @@ const main = async () => {
         ocrEngine.version = `${processorVersionDisplayName}: ${processorVersionName}`;
     }
 
-    const outputFolder = path.join(os.tmpdir(), path.parse(outputFileName).name);
     logger.info(`Downloading to ${outputFolder}...`);
     const files = await downloadOCRResults(requestId, { outputFolder });
     const pages = (await mapOCRDataToPages({ files })).map(({ id, text }) => {
